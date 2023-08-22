@@ -1,0 +1,10 @@
+## back
+api/package-lock.json
+api/.env
+api/node_modules/
+
+### front
+
+front/houseofdev/package-lock.json
+front/houseofdev/.env
+front/houseofdev/node_modules/
