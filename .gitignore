@@ -5,6 +5,6 @@ api/node_modules/
 
 ### front
 
-front/houseofdev/package-lock.json
-front/houseofdev/.env
-front/houseofdev/node_modules/
+front/houseOfDev/package-lock.json
+front/houseOfDev/.env
+front/houseOfDev/node_modules/
