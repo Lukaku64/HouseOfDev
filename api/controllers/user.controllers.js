@@ -1,4 +1,5 @@
 const UserModel = require("../schemas/User");
+const { generateToken, validateToken } = require("../config/tokens");
 
 const createUser = (req, res) => {
   const user = new UserModel(req.body);
@@ -8,6 +9,39 @@ const createUser = (req, res) => {
     .catch((err) =>
       res.status(400).send(`El usuario no pudo crearse, error: ${err}`)
     );
+};
+
+const loginUser = (req, res) => {
+  UserModel.findOne({ email: req.body.email })
+    .then((user) => {
+      if (!user) return res.status(401).send("Usuario no encontrado");
+
+      return user.comparePassword(req.body.password).then((passwordMatch) => {
+        if (passwordMatch) {
+          const payload = {
+            id: user._id,
+            name: user.name,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            favourites: user.favourties,
+          };
+          const token = generateToken(payload);
+          return res.cookie("token", token).send(payload);
+        } else {
+          return res.status(404).send("Contraseña incorrecta.");
+        }
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).send("Error al intentar loguear ");
+    });
+};
+
+const logOut = (req, res) => {
+  res.clearCookie("token");
+  res.sendStatus(204);
 };
 
 const getUsers = (req, res) => {
@@ -50,4 +84,6 @@ module.exports = {
   getUsers,
   getOneUser,
   deleteUser,
+  loginUser,
+  logOut,
 };
