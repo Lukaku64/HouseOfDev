@@ -1,22 +1,27 @@
-const { SERVER_PORT } = require("./config")
-const db = require("./config/db")
-const express = require("express")
-const morgan = require("morgan")
-const cookieParser = require("cookie-parser")
-const cors = require("cors")
+const { SERVER_PORT } = require("./config");
+const db = require("./config/db");
+const express = require("express");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-const routes = require("./routes")
+const routes = require("./routes");
 
-const app = express()
-app.use(morgan("dev"))
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors())
+const app = express();
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
-app.use("/api/v1", routes)
+app.use("/api/v1", routes);
 
 app.listen(SERVER_PORT, () => {
-    console.log(`servidor conectado al puerto ${SERVER_PORT}`)
-})
+  console.log(`servidor conectado al puerto ${SERVER_PORT}`);
+});
 
-db()
+db();
