@@ -5,11 +5,22 @@ const {
   getOneUser,
   createUser,
   deleteUser,
+  loginUser,
+  logOut,
 } = require("../controllers/user.controllers");
+const validateUser = require("../middlewares/validateUser");
 
-userRoutes.get("/", getUsers);
+userRoutes.get("/get", getUsers);
 
 userRoutes.post("/register", createUser);
+
+userRoutes.post("/login", loginUser);
+
+userRoutes.post("/logOut", logOut);
+
+userRoutes.get("/me", validateUser, (req, res) => {
+  res.status(200).send(...req.user);
+});
 
 userRoutes.get("/getOne/:id", getOneUser);
 
