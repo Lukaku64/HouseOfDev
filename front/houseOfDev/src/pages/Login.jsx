@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import houseImage from "../assets/house.png";
 import ofDevImage from "../assets/ofDev.png";
+import { setUser } from "../store/user";
 
 const initalValues = {
   email: "",
@@ -12,6 +14,10 @@ const initalValues = {
 function Login() {
   const [values, setValues] = useState(initalValues);
   const [isChange, setIsChange] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  axios.defaults.baseURL = "http://localhost:3000"; // URL de tu backend
+  axios.defaults.withCredentials = true; // Habilita el envío de cookies
 
   useEffect(() => {
     return values.email && values.password && isValidEmail(values.email)
@@ -34,7 +40,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post();
+    axios
+      .post("http://localhost:3000/api/v1/user/login", values)
+      .then((response) => {
+        const user = response.data;
+        console.log(user);
+        dispatch(setUser(user));
+        setTimeout(() => navigate("/"), 2000);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
