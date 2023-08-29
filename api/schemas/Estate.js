@@ -6,7 +6,7 @@ const estateSchema = new Schema({
   address: String,
   description: String,
   images: [String],
-  state: { type: String, enum: ["alquilar", "comprar"], default: "alquilar" },
+  state: { type: String, enum: ["alquiler", "comprar"], default: "alquiler" },
   squareMeter: String,
   bedroom: String,
   bathroom: String,
