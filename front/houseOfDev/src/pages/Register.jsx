@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 
 const initalValues = {
@@ -52,6 +53,7 @@ function register() {
 
   return (
     <>
+      <Navbar />
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="bg-white p-8 rounded shadow-md w-2/4">
           <h2 className="text-2xl mb-4">Registro</h2>
