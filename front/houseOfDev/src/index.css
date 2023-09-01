@@ -41,6 +41,15 @@
   border-bottom: 1px solid var(--color-blue);
 }
 
+.border-perfil {
+  border-radius: 0px 22px 22px 0px;
+  border: 1px solid var(--color-blue);
+}
+
+.background-white {
+  background-color: var(--color-white);
+}
+
 .text-blue {
   color: var(--color-blue);
 }
