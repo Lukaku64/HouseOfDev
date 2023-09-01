@@ -65,7 +65,7 @@ function Navbar() {
         <a href="" className="text-base mx-3">
           Nuestros servicios
         </a>
-        <a href="" className="text-base mx-3">
+        <a href="/viewUser" className="text-base mx-3">
           Perfil
         </a>
         <a href="" className="text-base mx-3">
