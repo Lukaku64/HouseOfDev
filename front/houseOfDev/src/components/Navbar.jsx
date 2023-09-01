@@ -38,8 +38,14 @@ function Navbar() {
   };
 
   return (
-    <nav className="background-red text-white p-5 flex justify-between items-center">
-      <img src={hod} alt="" className="ml-40" />
+    <nav
+      className={`text-white p-5 flex justify-between items-center ${
+        user?.role == "admin" ? "background-blue" : "background-red "
+      }`}
+    >
+      <a href="/">
+        <img src={hod} alt="" className="ml-40" />
+      </a>
       <div>
         <a href="" className="text-base mx-3">
           En venta
@@ -47,11 +53,17 @@ function Navbar() {
         <a href="" className="text-base mx-3">
           Alquiler
         </a>
+        {user?.role == "admin" ? (
+          <a href="/createpost" className="text-base mx-3">
+            Agrega Propiedades
+          </a>
+        ) : (
+          <a href="" className="text-base mx-3">
+            Agenda tu visita
+          </a>
+        )}
         <a href="" className="text-base mx-3">
-          Agenda tu visita
-        </a>
-        <a href="" className="text-base mx-3">
-          Nuestro servicios
+          Nuestros servicios
         </a>
         <a href="" className="text-base mx-3">
           Perfil

@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const estateSchema = new Schema({
   name: String,
   address: String,
+  price: String,
   description: String,
   images: [String],
   state: { type: String, enum: ["alquiler", "comprar"], default: "alquiler" },
