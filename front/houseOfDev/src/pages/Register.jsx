@@ -11,7 +11,7 @@ const initalValues = {
   confirmPassword: "",
 };
 
-function register() {
+function Register() {
   const [values, setValues] = useState(initalValues);
   const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
@@ -54,105 +54,93 @@ function register() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded shadow-md w-2/4">
-          <h2 className="text-2xl mb-4">Registro</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="name" className="block mb-1 font-medium">
-                Nombre
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={values.name}
-                onChange={handleInputChange}
-                required={true}
-                className="w-full px-3 py-2 border rounded"
-                placeholder="Ingresa tu nombre de usuario"
-              />
+      <div className="min-h-screen flex background-image">
+        <div className="background-white w-128">
+          <div className="mt-56 ml-96 shadow-xl">
+            <div className="background-white p-8 rounded w-96">
+              <h2 className="text-2xl mb-4 text-blue border-b-blue mb-4 p-2">
+                Registro
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={values.name}
+                    onChange={handleInputChange}
+                    required={true}
+                    className="w-full px-3 py-2 border-blue rounded-full background-white"
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={values.lastName}
+                    onChange={handleInputChange}
+                    required={true}
+                    className="w-full px-3 py-2 border-blue rounded-full background-white"
+                    placeholder="Apellido"
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleInputChange}
+                    required={true}
+                    className="w-full px-3 py-2 border-blue rounded-full background-white"
+                    placeholder="Email"
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleInputChange}
+                    required={true}
+                    className="w-full px-3 py-2 border-blue rounded-full background-white"
+                    placeholder="Contraseña"
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={values.confirmPassword}
+                    onChange={handleInputChange}
+                    required={true}
+                    className="w-full px-3 py-2 border-blue rounded-full background-white"
+                    placeholder="Confirmar Contraseña"
+                  />
+                  {values.password !== values.confirmPassword && (
+                    <span>Las contraseñas no coinciden</span>
+                  )}
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    className="w-24 border-blue text-blue py-2 rounded-full"
+                    disabled={!isChange}
+                  >
+                    Registrarse
+                  </button>
+                </div>
+              </form>
             </div>
-            <div className="mb-4">
-              <label htmlFor="lastName" className="block mb-1 font-medium">
-                Apellido
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={values.lastName}
-                onChange={handleInputChange}
-                required={true}
-                className="w-full px-3 py-2 border rounded"
-                placeholder="Ingresa tu nombre de usuario"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="block mb-1 font-medium">
-                Correo electrónico
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={values.email}
-                onChange={handleInputChange}
-                required={true}
-                className="w-full px-3 py-2 border rounded"
-                placeholder="Ingresa tu correo electrónico"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="password" className="block mb-1 font-medium">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={values.password}
-                onChange={handleInputChange}
-                required={true}
-                className="w-full px-3 py-2 border rounded"
-                placeholder="Ingresa tu contraseña"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="confirmPassword"
-                className="block mb-1 font-medium"
-              >
-                Repite tu contraseña
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={values.confirmPassword}
-                onChange={handleInputChange}
-                required={true}
-                className="w-full px-3 py-2 border rounded"
-                placeholder="Ingresa tu contraseña"
-              />
-              {values.password != values.confirmPassword && (
-                <span>Las contraseñas no coinciden</span>
-              )}
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded"
-                disabled={!isChange}
-              >
-                Registrarse
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default register;
+export default Register;
