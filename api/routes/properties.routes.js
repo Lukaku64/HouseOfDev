@@ -1,5 +1,8 @@
 const express = require("express");
+const multer = require("multer");
 const propertiesRoutes = express.Router();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const {
   getProperty,
   getOneProperty,
@@ -12,7 +15,7 @@ propertiesRoutes.get("/getAll", getProperty);
 
 propertiesRoutes.get("/get/:id", getOneProperty);
 
-propertiesRoutes.post("/create", createProperty);
+propertiesRoutes.post("/create", upload.single("images"), createProperty);
 
 propertiesRoutes.put("/update/:id", updateProperty);
 
