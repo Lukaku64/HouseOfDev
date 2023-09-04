@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import FormAdmin from "./pages/FormAdmin";
 import ViewUser from "./pages/ViewUser";
+import ViewProperty from "./pages/ViewProperty";
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/createpost" element={<FormAdmin />}></Route>
         <Route path="/viewUser" element={<ViewUser />}></Route>
+        <Route
+          path="/viewProperty/:idProperty"
+          element={<ViewProperty />}
+        ></Route>
       </Routes>
     </>
   );
