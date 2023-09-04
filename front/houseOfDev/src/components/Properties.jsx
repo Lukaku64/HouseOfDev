@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getUserByToken } from "../utils/api";
+import { Link } from "react-router-dom";
 
 const initalValues = {
   address: "",
@@ -190,12 +191,14 @@ function Properties() {
                   </>
                 )}
                 <div className="flex justify-end p-2">
-                  <button
-                    type="submit"
-                    className="w-20 border-blue text-blue text-sm py-2 m-1 rounded-full"
-                  >
-                    Ver mas
-                  </button>
+                  <Link to={`/viewProperty/${property._id}`}>
+                    <button
+                      type="submit"
+                      className="w-20 border-blue text-blue text-sm py-2 m-1 rounded-full"
+                    >
+                      Ver mas
+                    </button>
+                  </Link>
                   {user?.role === "admin" &&
                     property._id !== editingPropertyId && (
                       <button
