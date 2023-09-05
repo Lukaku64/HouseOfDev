@@ -9,11 +9,14 @@ const {
   createProperty,
   updateProperty,
   deleteProperty,
+  filterProperties,
 } = require("../controllers/properties.controllers");
 
 propertiesRoutes.get("/getAll", getProperty);
 
 propertiesRoutes.get("/get/:id", getOneProperty);
+
+propertiesRoutes.get("/filter", filterProperties);
 
 propertiesRoutes.post("/create", upload.single("images"), createProperty);
 
