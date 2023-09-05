@@ -74,6 +74,20 @@ const getProperty = (req, res) => {
     .catch((err) => res.status(404).send(err));
 };
 
+const filterProperties = (req, res) => {
+  const { state, address } = req.query;
+
+  const filter = {};
+  const regex = new RegExp(address, "i");
+  console.log("address", address);
+  if (state) filter.state = state;
+  if (address) filter.address = address;
+
+  EstateModel.find(filter)
+    .then((property) => res.status(201).send(property))
+    .catch((err) => res.status(404).send(err));
+};
+
 const getOneProperty = (req, res) => {
   const propertyId = req.params.id;
   EstateModel.findById(propertyId)
@@ -110,4 +124,5 @@ module.exports = {
   createProperty,
   updateProperty,
   deleteProperty,
+  filterProperties,
 };

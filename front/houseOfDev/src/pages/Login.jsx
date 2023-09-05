@@ -46,7 +46,8 @@ function Login() {
         const user = response.data;
         console.log(user);
         dispatch(setUser(user));
-        setTimeout(() => navigate("/"), 2000);
+        if (user.role === "user") setTimeout(() => navigate("/search"), 1500);
+        else setTimeout(() => navigate("/"), 2000);
       })
       .catch((err) => console.log(err));
   };
