@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import FormAdmin from "./pages/FormAdmin";
 import ViewUser from "./pages/ViewUser";
 import ViewProperty from "./pages/ViewProperty";
+import OnBoarding from "./pages/OnBoarding";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           path="/viewProperty/:idProperty"
           element={<ViewProperty />}
         ></Route>
+        <Route path="/search" element={<OnBoarding />}></Route>
       </Routes>
     </>
   );
