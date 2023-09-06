@@ -10,8 +10,10 @@ function Properties() {
   const [values, setValues] = useState({});
   const [editingPropertyId, setEditingPropertyId] = useState(null);
   const [filteredProperties, setFilteredProperties] = useState([]);
+  const [filteredPrice, setFilteredPrice] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const currentPage = location.pathname;
   const state = searchParams.get("state");
   const address = searchParams.get("address");
 
@@ -31,15 +33,21 @@ function Properties() {
   }, []);
 
   useEffect(() => {
-    const filtered = properties.filter((property) => {
-      return (
-        property.state.includes(state) ||
-        property.address.toLowerCase().includes(address.toLowerCase())
-      );
-    });
+    const page = currentPage.split("/")[1];
+    const filtered = page
+      ? properties.filter((property) => {
+          return property.state.includes(
+            page == "onSale" ? "comprar" : "alquiler"
+          );
+        })
+      : properties.filter((property) => {
+          return (
+            property.state.includes(state) ||
+            property.address.toLowerCase().includes(address?.toLowerCase())
+          );
+        });
     setFilteredProperties(filtered);
   }, [properties]);
-  console.log(filteredProperties);
 
   const handleEditProperty = (propertyId) => {
     setEditingPropertyId(propertyId);
@@ -51,6 +59,30 @@ function Properties() {
       ...values,
       [name]: value,
     });
+  };
+
+  const handlePrice = (e) => {
+    const minPrice = parseFloat(values.min);
+    const maxPrice = parseFloat(values.max);
+
+    if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+      const filtered =
+        filteredProperties >= 1
+          ? filteredProperties.filter((property) => {
+              const propertyPrice = parseFloat(property.price);
+              return propertyPrice >= minPrice && propertyPrice <= maxPrice;
+            })
+          : properties.filter((property) => {
+              const propertyPrice = parseFloat(property.price);
+              return (
+                (propertyPrice >= minPrice && propertyPrice <= maxPrice) ||
+                property.address
+                  .toLowerCase()
+                  .includes(values.addressChange.toLowerCase())
+              );
+            });
+      setFilteredProperties(filtered);
+    }
   };
 
   const handleEditSubmit = (e) => {
@@ -79,9 +111,47 @@ function Properties() {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <>
+      {address == null && (
+        <div className="ml-5">
+          <h1 className="text-lg font-semibold ">Ubicacion</h1>
+          <input
+            type="text"
+            name="addressChange"
+            value={values.addressChange}
+            onChange={handleInputChange}
+            placeholder="Ubicacion"
+            className="border-blue text-sm mx-2 text-center w-64"
+          />
+        </div>
+      )}
+      <div className="ml-5">
+        <h1 className="text-lg font-semibold ">Precio</h1>
+        <input
+          type="text"
+          name="min"
+          value={values.min}
+          onChange={handleInputChange}
+          placeholder="Mínimo"
+          className="border-blue text-sm mx-2 text-center w-32"
+        />
+        <input
+          type="text"
+          name="max"
+          value={values.max}
+          onChange={handleInputChange}
+          placeholder="Máximo"
+          className="border-blue text-sm mx-2 text-center w-32"
+        />
+        <button
+          type="submit"
+          className="w-20 border-blue text-blue text-sm py-1 m-1 rounded-full"
+          onClick={handlePrice}
+        >
+          Aceptar
+        </button>
+      </div>
       <ul className="grid grid-cols-2 xl:grid-cols-3">
         {filteredProperties.length >= 1
           ? filteredProperties.map((property) => (
