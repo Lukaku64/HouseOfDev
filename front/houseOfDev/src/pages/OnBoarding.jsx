@@ -74,6 +74,12 @@ function OnBoarding() {
                     className="w-full px-3 text-sm py-2 border-blue rounded-full mb-2"
                   />
                 </div>
+                <a
+                  href="/"
+                  className="text-sm text-zinc-600 hover:text-zinc-900"
+                >
+                  Omitir
+                </a>
                 <div className="flex justify-end">
                   <a
                     href={`/?state=${values.state}&address=${values.address}`}
