@@ -47,10 +47,10 @@ function Navbar() {
         <img src={hod} alt="" className="ml-40" />
       </a>
       <div>
-        <a href="" className="text-base mx-3">
+        <a href="/onSale" className="text-base mx-3">
           En venta
         </a>
-        <a href="" className="text-base mx-3">
+        <a href="rent" className="text-base mx-3">
           Alquiler
         </a>
         {user?.role == "admin" ? (

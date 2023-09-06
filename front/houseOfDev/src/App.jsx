@@ -6,6 +6,8 @@ import FormAdmin from "./pages/FormAdmin";
 import ViewUser from "./pages/ViewUser";
 import ViewProperty from "./pages/ViewProperty";
 import OnBoarding from "./pages/OnBoarding";
+import OnSale from "./pages/OnSale";
+import Rent from "./pages/Rent";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           element={<ViewProperty />}
         ></Route>
         <Route path="/search" element={<OnBoarding />}></Route>
+        <Route path="/onSale" element={<OnSale />}></Route>
+        <Route path="/rent" element={<Rent />}></Route>
       </Routes>
     </>
   );
