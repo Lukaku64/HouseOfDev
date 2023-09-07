@@ -1,5 +1,6 @@
 const EstateModel = require("../schemas/Estate");
 const crypto = require("crypto");
+const sendEmail = require("../utils/date");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 require("dotenv").config();
 
@@ -64,6 +65,39 @@ const createProperty = (req, res) => {
   }
 };
 
+const createDate = (req, res) => {
+  const propertyId = req.params.id;
+  const { date, hour, userId } = req.body;
+  EstateModel.findById(propertyId)
+    .then((property) => {
+      if (!property) res.status(404).send("No existe la propiedad");
+
+      property.date.push({ date, hour, user: userId });
+      sendEmail(userId);
+      property.save();
+    })
+    .then(() => res.status(201).send("Agendado con exito"))
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+};
+
+const confirmDate = (req, res) => {
+  const propertyId = req.params.id;
+  const { confirm, dateId } = req.body;
+  EstateModel.findById(propertyId)
+    .then((property) => {
+      if (!property) res.status(404).send("No existe la propiedad");
+      const object = property.date.find((e) => e._id == dateId);
+      object.confirm = confirm;
+      property.save();
+      res.status(201).send("Cita confirmada");
+    })
+    .catch((err) => {
+      res.status(404).send(err);
+    });
+};
+
 const getProperty = (req, res) => {
   EstateModel.find()
     .then((property) => {
@@ -125,4 +159,6 @@ module.exports = {
   updateProperty,
   deleteProperty,
   filterProperties,
+  createDate,
+  confirmDate,
 };
