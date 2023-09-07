@@ -17,7 +17,14 @@ const estateSchema = new Schema({
       comments: String,
     },
   ],
-  date: [{ date: Date, nameCustomer: String, phone: Number, email: String }],
+  date: [
+    {
+      date: Date,
+      hour: String,
+      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      confirm: { type: Boolean, default: false },
+    },
+  ],
 });
 
 const estateModel = mongoose.model("Estate", estateSchema);
