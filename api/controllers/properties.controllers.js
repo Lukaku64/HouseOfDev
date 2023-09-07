@@ -1,6 +1,7 @@
 const EstateModel = require("../schemas/Estate");
 const crypto = require("crypto");
 const sendEmail = require("../utils/date");
+const confirmMail = require("../utils/confirmDate");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 require("dotenv").config();
 
@@ -90,6 +91,7 @@ const confirmDate = (req, res) => {
       if (!property) res.status(404).send("No existe la propiedad");
       const object = property.date.find((e) => e._id == dateId);
       object.confirm = confirm;
+      confirmMail(object.user, propertyId, dateId);
       property.save();
       res.status(201).send("Cita confirmada");
     })
