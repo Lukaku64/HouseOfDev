@@ -102,6 +102,10 @@ const confirmDate = (req, res) => {
 
 const getProperty = (req, res) => {
   EstateModel.find()
+    .populate({
+      path: "date.user",
+      select: "name lastName email",
+    })
     .then((property) => {
       if (property.length === 0)
         res.status(404).send("No hay ninguna propiedad");
