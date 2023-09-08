@@ -8,6 +8,8 @@ import ViewProperty from "./pages/ViewProperty";
 import OnBoarding from "./pages/OnBoarding";
 import OnSale from "./pages/OnSale";
 import Rent from "./pages/Rent";
+import ViewAppointment from "./pages/ViewAppointment";
+import ViewAllDates from "./pages/ViewAllDates";
 
 function App() {
   return (
@@ -25,6 +27,11 @@ function App() {
         <Route path="/search" element={<OnBoarding />}></Route>
         <Route path="/onSale" element={<OnSale />}></Route>
         <Route path="/rent" element={<Rent />}></Route>
+        <Route
+          path="/viewAppointment/:id"
+          element={<ViewAppointment />}
+        ></Route>
+        <Route path="/viewAllDates" element={<ViewAllDates />}></Route>
       </Routes>
     </>
   );
