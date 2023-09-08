@@ -84,7 +84,18 @@ function Navbar() {
             </a>
           </>
         ) : (
-          <button onClick={handleLogOut}>Logout</button>
+          <>
+            {user?.role == "admin" || user?.role == "agente" ? (
+              <a href="/viewAllDates" className="text-base mx-3">
+                Ver Citas
+              </a>
+            ) : (
+              <a href="" className="text-base mx-3">
+                Favoritos
+              </a>
+            )}
+            <button onClick={handleLogOut}>Logout</button>
+          </>
         )}
       </div>
     </nav>

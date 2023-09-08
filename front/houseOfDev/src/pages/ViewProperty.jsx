@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 function ViewProperty() {
@@ -48,9 +48,11 @@ function ViewProperty() {
                 </p>
               </div>
               <div className="flex h-44 2xl:h-80 justify-end items-end p-2">
-                <button className="w-30 border-blue text-blue text-sm p-2 m-1 rounded-full">
-                  Agendar Cita
-                </button>
+                <Link to={`/viewAppointment/${property._id}`}>
+                  <button className="w-30 border-blue text-blue text-sm p-2 m-1 rounded-full">
+                    Agendar Cita
+                  </button>
+                </Link>
                 <button className="w-30 border-blue text-blue text-sm p-2 m-1 rounded-full">
                   Agregar a Favoritos
                 </button>

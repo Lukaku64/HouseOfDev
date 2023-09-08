@@ -19,7 +19,7 @@ const estateSchema = new Schema({
   ],
   date: [
     {
-      date: Date,
+      date: String,
       hour: String,
       user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       confirm: { type: Boolean, default: false },
