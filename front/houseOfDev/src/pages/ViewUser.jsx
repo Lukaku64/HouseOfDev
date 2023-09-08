@@ -4,7 +4,7 @@ import { getUserByToken } from "../utils/api";
 import Navbar from "../components/Navbar";
 
 function ViewUser() {
-  const [user, setClient] = useState(null);
+  const [user, setClient] = useState({});
 
   useEffect(() => {
     const handle = async () => {
@@ -12,13 +12,6 @@ function ViewUser() {
       return setClient(user);
     };
     handle();
-
-    //   axios
-    //     .get(
-    //       `http://localhost:3000/api/v1/user/getOne/64e621232b8ea9080b283d28http://localhost:3000/api/v1/user/getOne/${user._id}`
-    //     )
-    //     .then()
-    //     .catch((err) => console.log(err));
   }, []);
   console.log(user);
   return (
