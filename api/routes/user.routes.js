@@ -7,6 +7,8 @@ const {
   deleteUser,
   loginUser,
   logOut,
+  addFavorites,
+  deleteFavorite,
 } = require("../controllers/user.controllers");
 const validateUser = require("../middlewares/validateUser");
 
@@ -21,6 +23,10 @@ userRoutes.post("/logOut", logOut);
 userRoutes.get("/me", validateUser, (req, res) => {
   res.status(200).send(...req.user);
 });
+
+userRoutes.post("/favorites/add/:id", addFavorites);
+
+userRoutes.delete("/favorites/delete/:id", deleteFavorite);
 
 userRoutes.get("/getOne/:id", getOneUser);
 
