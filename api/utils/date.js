@@ -24,8 +24,8 @@ const sendEmail = (userId) => {
       });
       const emailBody = {
         body: {
-          name: response.name,
-          intro: `Gracias! ${response.lastName} ${response.name} por agendar una cita en nuestra pagina`,
+          name: response?.name,
+          intro: `Gracias! ${response?.lastName} ${response?.name} por agendar una cita en nuestra pagina`,
           action: {
             button: {
               color: "#22BC66",
