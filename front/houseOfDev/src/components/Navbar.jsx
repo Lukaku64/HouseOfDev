@@ -90,7 +90,7 @@ function Navbar() {
                 Ver Citas
               </a>
             ) : (
-              <a href="" className="text-base mx-3">
+              <a href="/favorites" className="text-base mx-3">
                 Favoritos
               </a>
             )}
