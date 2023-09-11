@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import imgNot from "../assets/imgNoDisponible.jpg";
 
 function Property({
   property,
@@ -9,16 +10,17 @@ function Property({
   handleEditSubmit,
   handleDeleteSubmit,
   handleEditProperty,
+  handleAddFav,
   user,
 }) {
   return (
     <>
       <div className="flex border-blue-2 ">
         <div className="w-1/3 border-r-blue ">
-          {property?.images ? (
-            <img src={property?.images} alt="" />
+          {property?.images[0] ? (
+            <img src={property?.images} alt="imagen" />
           ) : (
-            <h1>{property?.name} </h1>
+            <img src={imgNot} alt="Imagen no disponible" />
           )}
         </div>
         <div className="w-2/3">
@@ -117,7 +119,9 @@ function Property({
                   {property.bedroom} dorm.
                 </span>
                 <span className="border-b-blue text-blue w-1/3 p-2">
-                  {property.bathroom} baños
+                  {parseInt(property.bathroom) > 1
+                    ? `${property.bathroom} baños`
+                    : `${property.bathroom} baño`}
                 </span>
               </div>
               <p className="border-b-blue text-blue p-2">
@@ -126,6 +130,16 @@ function Property({
             </>
           )}
           <div className="flex justify-end p-2">
+            <button
+              type="submit"
+              className="w-8 h-8 m-1 mt-2 rounded-icons"
+              onClick={() => handleAddFav(property._id)}
+            >
+              f
+            </button>
+            <button type="submit" className="w-8 h-8 m-1 mt-2 rounded-icons">
+              c
+            </button>
             <Link to={`/viewProperty/${property._id}`}>
               <button
                 type="submit"
@@ -138,7 +152,7 @@ function Property({
               <button
                 type="submit"
                 className="w-20 border-blue text-blue text-sm py-2 m-1 rounded-full"
-                onClick={() => handleEditProperty(property._id)}
+                onClick={(event) => handleEditProperty(event, property._id)}
               >
                 Editar
               </button>

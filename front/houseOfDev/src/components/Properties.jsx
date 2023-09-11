@@ -111,6 +111,19 @@ function Properties() {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleAddFav = (propertyId) => {
+    console.log(user.id);
+    axios
+      .post(`http://localhost:3000/api/v1/user/favorites/add/${user.id}`, {
+        propertyId,
+      })
+      .then((res) => {
+        console.log("se agrego a favoritos", res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       {address == null && (
@@ -164,6 +177,7 @@ function Properties() {
                   handleEditSubmit={handleEditSubmit}
                   handleDeleteSubmit={handleDeleteSubmit}
                   handleEditProperty={handleEditProperty}
+                  handleAddFav={handleAddFav}
                   user={user}
                 />
               </li>
@@ -178,6 +192,7 @@ function Properties() {
                   handleEditSubmit={handleEditSubmit}
                   handleDeleteSubmit={handleDeleteSubmit}
                   handleEditProperty={handleEditProperty}
+                  handleAddFav={handleAddFav}
                   user={user}
                 />
               </li>

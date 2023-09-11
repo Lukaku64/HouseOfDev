@@ -10,6 +10,7 @@ import OnSale from "./pages/OnSale";
 import Rent from "./pages/Rent";
 import ViewAppointment from "./pages/ViewAppointment";
 import ViewAllDates from "./pages/ViewAllDates";
+import Favorites from "./pages/Favorites";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           element={<ViewAppointment />}
         ></Route>
         <Route path="/viewAllDates" element={<ViewAllDates />}></Route>
+        <Route path="/favorites" element={<Favorites />}></Route>
       </Routes>
     </>
   );

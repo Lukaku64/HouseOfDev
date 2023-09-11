@@ -46,6 +46,11 @@
   border: 0.5px solid var(--color-blue);
 }
 
+.rounded-icons {
+  border-radius: 9999px;
+  border: 0.5px solid var(--color-red);
+}
+
 .background-white {
   background-color: var(--color-white);
 }
