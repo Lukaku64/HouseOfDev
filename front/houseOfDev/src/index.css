@@ -80,6 +80,16 @@
   flex-shrink: 0;
 }
 
+.star {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.selected {
+  color: var(--color-blue);
+}
+
 input::placeholder {
   color: var(--color-blue);
 }
