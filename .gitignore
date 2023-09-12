@@ -7,4 +7,5 @@ api/node_modules/
 
 front/houseOfDev/package-lock.json
 front/houseOfDev/.env
+front/houseOfDev/.env.local
 front/houseOfDev/node_modules/
