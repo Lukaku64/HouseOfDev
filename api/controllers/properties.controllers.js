@@ -100,6 +100,36 @@ const confirmDate = (req, res) => {
     });
 };
 
+const postReview = (req, res) => {
+  const propertyId = req.params.id;
+  const { comments, stars, userId } = req.body;
+  EstateModel.findById(propertyId)
+    .then((property) => {
+      if (!property) res.status(404).send("No existe la propieda");
+      property.reviews.push({ comments, stars, user: userId });
+      const average = property.reviews.reduce(
+        (acc, value) => acc + value.stars,
+        0
+      );
+      property.averageRating =
+        average > 0 ? average / property.reviews.length : 0;
+      property.save();
+      res.status(201).send("Review posteada");
+    })
+    .catch((err) => res.status(404).send(err));
+};
+
+const getReviews = (req, res) => {
+  const propertyId = req.params.id;
+  EstateModel.findById(propertyId, "averageRating reviews")
+    .populate({ path: "reviews.user", select: "name lastName" })
+    .then((property) => {
+      if (!property) res.status(404).send("No existe la propiedad");
+      res.status(200).json(property);
+    })
+    .catch((err) => res.status(404).send(err));
+};
+
 const getProperty = (req, res) => {
   EstateModel.find()
     .populate({
@@ -167,4 +197,6 @@ module.exports = {
   filterProperties,
   createDate,
   confirmDate,
+  postReview,
+  getReviews,
 };

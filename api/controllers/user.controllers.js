@@ -17,21 +17,24 @@ const loginUser = (req, res) => {
     .then((user) => {
       if (!user) return res.status(401).send("Usuario no encontrado");
 
-      return user.comparePassword(req.body.password).then((passwordMatch) => {
-        if (passwordMatch) {
-          const payload = {
-            id: user._id,
-            name: user.name,
-            lastName: user.lastName,
-            email: user.email,
-            role: user.role,
-          };
-          const token = generateToken(payload);
-          return res.cookie("token", token).send(payload);
-        } else {
-          return res.status(404).send("Contraseña incorrecta.");
-        }
-      });
+      return user
+        .comparePassword(req.body.password)
+        .then((passwordMatch) => {
+          if (passwordMatch) {
+            const payload = {
+              id: user._id,
+              name: user.name,
+              lastName: user.lastName,
+              email: user.email,
+              role: user.role,
+            };
+            const token = generateToken(payload);
+            return res.cookie("token", token).send(payload);
+          } else {
+            return res.status(403).send("Contraseña incorrecta.");
+          }
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
       console.log(err);

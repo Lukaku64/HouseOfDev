@@ -12,6 +12,8 @@ const {
   filterProperties,
   createDate,
   confirmDate,
+  postReview,
+  getReviews,
 } = require("../controllers/properties.controllers");
 
 propertiesRoutes.get("/getAll", getProperty);
@@ -25,6 +27,10 @@ propertiesRoutes.post("/create", upload.single("images"), createProperty);
 propertiesRoutes.post("/date/:id", createDate);
 
 propertiesRoutes.post("/date/confirm/:id", confirmDate);
+
+propertiesRoutes.post("/review/:id/post", postReview);
+
+propertiesRoutes.get("/review/:id/get", getReviews);
 
 propertiesRoutes.put("/update/:id", updateProperty);
 
