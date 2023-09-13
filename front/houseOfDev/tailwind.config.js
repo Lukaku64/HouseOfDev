@@ -7,6 +7,12 @@ export default {
         128: "38rem",
         102: "34rem",
       },
+      padding: {
+        100: "28rem",
+      },
+      screens: {
+        "3xl": "1690px",
+      },
     },
   },
   plugins: [],
