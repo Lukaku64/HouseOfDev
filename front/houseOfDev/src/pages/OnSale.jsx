@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Properties from "../components/Properties";
+import Banner from "../components/Banner";
 
 function OnSale() {
   return (
     <>
       <Navbar />
-      <h1>Propiedades en Venta</h1>
+      <Banner />
       <Properties />
     </>
   );
