@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import imgNot from "../assets/imgNoDisponible.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { SlLocationPin } from "react-icons/sl";
 
 function ViewAllDates() {
   const [properties, setProperties] = useState([]);
@@ -82,9 +83,10 @@ function ViewAllDates() {
                             {e.hour}
                           </span>
                         </div>
-                        <p className="border-b-blue text-blue py-2 pl-6">
-                          {property.address}{" "}
-                        </p>
+                        <div className="border-b-blue text-blue py-2 pl-1">
+                          <SlLocationPin className="inline" />
+                          <p className="inline"> {property.address}</p>
+                        </div>
                         <div className="border-b-blue py-1 pl-6">
                           <p className="text-blue text-sm">User</p>
                           <p className="text-blue font-semibold">

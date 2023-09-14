@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 
 function OnBoarding() {
   const [values, setValues] = useState({});
@@ -64,15 +64,20 @@ function OnBoarding() {
                     </label>
                   </div>
                 </div>
-                <div>
-                  <input
-                    type="text"
-                    name="address"
-                    value={values.address}
-                    onChange={handleInputChange}
-                    placeholder="Ubicacion"
-                    className="w-full px-3 text-sm py-2 border-blue rounded-full mb-2"
-                  />
+                <div className="w-full px-3 text-sm py-2 border-blue rounded-full mb-2 flex">
+                  <div className="mx-1 p-1 rounded-icons">
+                    <FaSearch className="color-icons" />
+                  </div>
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      name="address"
+                      value={values.address}
+                      onChange={handleInputChange}
+                      placeholder="Ubicacion"
+                      className="w-full"
+                    />
+                  </div>
                 </div>
                 <a
                   href="/"
@@ -83,7 +88,7 @@ function OnBoarding() {
                 <div className="flex justify-end">
                   <a
                     href={`/?state=${values.state}&address=${values.address}`}
-                    className="w-40 border-blue text-blue py-2 rounded-full"
+                    className="w-40 border-blue text-blue py-2 pl-3 rounded-full"
                   >
                     Ver Propiedades
                   </a>

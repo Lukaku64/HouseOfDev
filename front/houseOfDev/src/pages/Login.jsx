@@ -5,6 +5,8 @@ import axios from "axios";
 import houseImage from "../assets/house.png";
 import ofDevImage from "../assets/ofDev.png";
 import { setUser } from "../store/user";
+import { FaRegEnvelope, FaLock } from "react-icons/fa";
+import { LiaLockSolid } from "react-icons/lia";
 
 const initalValues = {
   email: "",
@@ -68,29 +70,39 @@ function Login() {
             </div>
             <div className="bg-white p-8 rounded  w-96">
               <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleInputChange}
-                    required={true}
-                    className="w-full px-3 py-2 border-blue rounded-full"
-                    placeholder="Email"
-                  />
+                <div className="mb-4 w-full px-3 py-2 border-blue rounded-full flex">
+                  <div className="mx-1 p-1 rounded-icons">
+                    <FaRegEnvelope className="color-icons" />
+                  </div>
+                  <div className="w-full">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={values.email}
+                      onChange={handleInputChange}
+                      required={true}
+                      className="w-full text-sm"
+                      placeholder="EMAIL"
+                    />
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleInputChange}
-                    required={true}
-                    className="w-full px-3 py-2 border-blue rounded-full"
-                    placeholder="Password"
-                  />
+                <div className="mb-4 w-full px-3 py-2 border-blue rounded-full flex">
+                  <div className="mx-1 p-1 rounded-icons">
+                    <LiaLockSolid className="color-icons" />
+                  </div>
+                  <div className="w-full">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleInputChange}
+                      required={true}
+                      className="w-full text-sm"
+                      placeholder="PASSWORD"
+                    />
+                  </div>
                 </div>
                 <a className="text-sm text-blue" href="https://www.google.com/">
                   ¿Olvidaste tu contraseña?
