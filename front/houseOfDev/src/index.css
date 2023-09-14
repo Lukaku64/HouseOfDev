@@ -56,6 +56,10 @@
   border: 0.5px solid var(--color-red);
 }
 
+.color-icons {
+  color: var(--color-blue);
+}
+
 .background-white {
   background-color: var(--color-white);
 }
@@ -116,6 +120,10 @@
 
 input::placeholder {
   color: var(--color-blue);
+}
+
+input:focus {
+  outline: none;
 }
 
 body {

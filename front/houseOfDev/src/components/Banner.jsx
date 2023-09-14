@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { BiHeart } from "react-icons/bi";
+import { MdNotifications, MdOutlineArrowRightAlt } from "react-icons/md";
 
 function Banner() {
   const location = useLocation();
@@ -22,14 +24,24 @@ function Banner() {
         </div>
         <div className="flex justify-end ">
           <Link to={"/notificaciones"}>
-            <button className="w-40 border-blue text-blue text-sm py-2 m-1 rounded-full">
-              NOTIFICACIONES
-            </button>
+            <div className="flex w-44 border-blue text-blue text-sm py-2 m-1 rounded-full">
+              <div className="mx-1 p-1 rounded-icons">
+                <MdNotifications />
+              </div>
+              <div className="w-full">
+                <button className="w-full">NOTIFICACIONES</button>
+              </div>
+            </div>
           </Link>
           <Link to={"/favorites"}>
-            <button className="w-36 border-favoritos text-blue text-sm py-2 m-1 rounded-full">
-              FAVORITOS
-            </button>
+            <div className="flex w-36 border-favoritos text-blue text-sm py-2 m-1 rounded-full">
+              <div className="mx-1 p-1 rounded-icons">
+                <BiHeart />
+              </div>
+              <div className="w-full">
+                <button className="w-full">FAVORITOS</button>
+              </div>
+            </div>
           </Link>
         </div>
         <div className="h-64 border-b-blue pb-100 pt-4 ">
@@ -41,9 +53,14 @@ function Banner() {
                 </h1>
                 <div className="flex justify-end mt-4">
                   <Link to={"/inmobiliaria"}>
-                    <button className="w-36 border text-blue bg-white text-sm p-2 m-1 rounded-full">
-                      INMOBILIARIA
-                    </button>
+                    <div className="flex w-40 border text-blue bg-white text-sm p-2 m-1 rounded-full">
+                      <div className="w-full">
+                        <button className="w-full">INMOBILIARIA</button>
+                      </div>
+                      <div className="mx-1 p-1 rounded-icons">
+                        <MdOutlineArrowRightAlt />
+                      </div>
+                    </div>
                   </Link>
                 </div>
               </div>
