@@ -12,15 +12,31 @@ import ViewAppointment from "./pages/ViewAppointment";
 import ViewAllDates from "./pages/ViewAllDates";
 import Favorites from "./pages/Favorites";
 import ViewAllUsers from "./pages/ViewAllUsers";
+import IsLogged from "./components/IsLogged";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/createpost" element={<FormAdmin />}></Route>
+        <Route
+          path="/login"
+          element={
+            <IsLogged>
+              <Login />
+            </IsLogged>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <IsLogged>
+              <Register />
+            </IsLogged>
+          }
+        ></Route>
+
         <Route path="/viewUser" element={<ViewUser />}></Route>
         <Route
           path="/viewProperty/:idProperty"
@@ -33,9 +49,31 @@ function App() {
           path="/viewAppointment/:id"
           element={<ViewAppointment />}
         ></Route>
-        <Route path="/viewAllDates" element={<ViewAllDates />}></Route>
         <Route path="/favorites" element={<Favorites />}></Route>
-        <Route path="/viewAllUsers" element={<ViewAllUsers />}></Route>
+        <Route
+          path="/createpost"
+          element={
+            <ProtectedRoute onlyAdmin>
+              <FormAdmin />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/viewAllUsers"
+          element={
+            <ProtectedRoute onlyAdmin>
+              <ViewAllUsers />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/viewAllDates"
+          element={
+            <ProtectedRoute onlyAdminOrAgent>
+              <ViewAllDates />
+            </ProtectedRoute>
+          }
+        ></Route>
       </Routes>
     </>
   );

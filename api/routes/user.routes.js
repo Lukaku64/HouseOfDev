@@ -10,7 +10,11 @@ const {
   addFavorites,
   deleteFavorite,
 } = require("../controllers/user.controllers");
-const validateUser = require("../middlewares/validateUser");
+const {
+  validateUser,
+  isLogged,
+  isAdmin,
+} = require("../middlewares/validateUser");
 
 userRoutes.get("/get", getUsers);
 
@@ -24,12 +28,12 @@ userRoutes.get("/me", validateUser, (req, res) => {
   res.status(200).send(...req.user);
 });
 
-userRoutes.post("/favorites/add/:id", addFavorites);
+userRoutes.post("/favorites/add/:id", isLogged, addFavorites);
 
-userRoutes.delete("/favorites/delete/:id", deleteFavorite);
+userRoutes.delete("/favorites/delete/:id", isLogged, deleteFavorite);
 
-userRoutes.get("/getOne/:id", getOneUser);
+userRoutes.get("/getOne/:id", isLogged, getOneUser);
 
-userRoutes.delete("/delete/:id", deleteUser);
+userRoutes.delete("/delete/:id", isAdmin, deleteUser);
 
 module.exports = userRoutes;
