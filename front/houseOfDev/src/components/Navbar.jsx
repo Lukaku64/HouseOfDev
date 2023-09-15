@@ -86,9 +86,14 @@ function Navbar() {
         ) : (
           <>
             {user?.role == "admin" || user?.role == "agente" ? (
-              <a href="/viewAllDates" className="text-base mx-3">
-                Ver Citas
-              </a>
+              <>
+                <a href="/viewAllUsers" className="text-base mx-3">
+                  Usuarios
+                </a>
+                <a href="/viewAllDates" className="text-base mx-3">
+                  Ver Citas
+                </a>
+              </>
             ) : (
               <a href="/favorites" className="text-base mx-3">
                 Favoritos
