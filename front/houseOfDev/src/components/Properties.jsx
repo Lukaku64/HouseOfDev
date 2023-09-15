@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getUserByToken } from "../utils/api";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Property from "../commons/Property";
 
 function Properties() {
@@ -10,7 +10,6 @@ function Properties() {
   const [values, setValues] = useState({});
   const [editingPropertyId, setEditingPropertyId] = useState(null);
   const [filteredProperties, setFilteredProperties] = useState([]);
-  const [filteredPrice, setFilteredPrice] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const currentPage = location.pathname;
@@ -48,7 +47,6 @@ function Properties() {
         });
     setFilteredProperties(filtered);
   }, [properties]);
-
   const handleEditProperty = (propertyId) => {
     setEditingPropertyId(propertyId);
   };
@@ -62,25 +60,39 @@ function Properties() {
   };
 
   const handlePrice = (e) => {
+    console.log("eeeee");
     const minPrice = parseFloat(values.min);
     const maxPrice = parseFloat(values.max);
-
-    if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+    const filterProp = (property) => {
+      const propertyPrice = parseFloat(property.price);
+      if (minPrice && maxPrice && values.addressChange) {
+        return (
+          propertyPrice >= minPrice &&
+          propertyPrice <= maxPrice &&
+          property.address
+            .toLowerCase()
+            .includes(values.addressChange?.toLowerCase())
+        );
+      } else {
+        return (
+          (propertyPrice >= minPrice && propertyPrice <= maxPrice) ||
+          property.address
+            .toLowerCase()
+            .includes(values.addressChange?.toLowerCase())
+        );
+      }
+    };
+    const page = currentPage.split("/")[1];
+    if ((!isNaN(minPrice) && !isNaN(maxPrice)) || values.addressChange) {
       const filtered =
         filteredProperties >= 1
           ? filteredProperties.filter((property) => {
               const propertyPrice = parseFloat(property.price);
               return propertyPrice >= minPrice && propertyPrice <= maxPrice;
             })
-          : properties.filter((property) => {
-              const propertyPrice = parseFloat(property.price);
-              return (
-                (propertyPrice >= minPrice && propertyPrice <= maxPrice) ||
-                property.address
-                  .toLowerCase()
-                  .includes(values.addressChange.toLowerCase())
-              );
-            });
+          : page.length >= 3
+          ? filteredProperties.filter(filterProp)
+          : properties.filter(filterProp);
       setFilteredProperties(filtered);
     }
   };
@@ -126,45 +138,49 @@ function Properties() {
 
   return (
     <>
-      {address == null && (
-        <div className="ml-5">
-          <h1 className="text-lg font-semibold ">Ubicacion</h1>
-          <input
-            type="text"
-            name="addressChange"
-            value={values.addressChange}
-            onChange={handleInputChange}
-            placeholder="Ubicacion"
-            className="border-blue text-sm mx-2 text-center w-64"
-          />
-        </div>
+      {!state?.length >= 1 && (
+        <>
+          {address == null && (
+            <div className="ml-5">
+              <h1 className="text-lg font-semibold ">Ubicacion</h1>
+              <input
+                type="text"
+                name="addressChange"
+                value={values.addressChange}
+                onChange={handleInputChange}
+                placeholder="Ubicacion"
+                className="border-blue text-sm mx-2 text-center w-64"
+              />
+            </div>
+          )}
+          <div className="ml-5">
+            <h1 className="text-lg font-semibold ">Precio</h1>
+            <input
+              type="text"
+              name="min"
+              value={values.min}
+              onChange={handleInputChange}
+              placeholder="Mínimo"
+              className="border-blue text-sm mx-2 text-center w-32"
+            />
+            <input
+              type="text"
+              name="max"
+              value={values.max}
+              onChange={handleInputChange}
+              placeholder="Máximo"
+              className="border-blue text-sm mx-2 text-center w-32"
+            />
+            <button
+              type="submit"
+              className="w-20 border-blue text-blue text-sm py-1 m-1 rounded-full"
+              onClick={handlePrice}
+            >
+              Aceptar
+            </button>
+          </div>
+        </>
       )}
-      <div className="ml-5">
-        <h1 className="text-lg font-semibold ">Precio</h1>
-        <input
-          type="text"
-          name="min"
-          value={values.min}
-          onChange={handleInputChange}
-          placeholder="Mínimo"
-          className="border-blue text-sm mx-2 text-center w-32"
-        />
-        <input
-          type="text"
-          name="max"
-          value={values.max}
-          onChange={handleInputChange}
-          placeholder="Máximo"
-          className="border-blue text-sm mx-2 text-center w-32"
-        />
-        <button
-          type="submit"
-          className="w-20 border-blue text-blue text-sm py-1 m-1 rounded-full"
-          onClick={handlePrice}
-        >
-          Aceptar
-        </button>
-      </div>
       <ul className="grid grid-cols-2 xl:grid-cols-3">
         {filteredProperties.length >= 1
           ? filteredProperties.map((property) => (
