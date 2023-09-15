@@ -11,6 +11,7 @@ import Rent from "./pages/Rent";
 import ViewAppointment from "./pages/ViewAppointment";
 import ViewAllDates from "./pages/ViewAllDates";
 import Favorites from "./pages/Favorites";
+import ViewAllUsers from "./pages/ViewAllUsers";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         ></Route>
         <Route path="/viewAllDates" element={<ViewAllDates />}></Route>
         <Route path="/favorites" element={<Favorites />}></Route>
+        <Route path="/viewAllUsers" element={<ViewAllUsers />}></Route>
       </Routes>
     </>
   );
