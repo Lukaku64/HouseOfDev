@@ -15,6 +15,11 @@ const {
   postReview,
   getReviews,
 } = require("../controllers/properties.controllers");
+const {
+  isAdmin,
+  isAdminOrAgent,
+  isLogged,
+} = require("../middlewares/validateUser");
 
 propertiesRoutes.get("/getAll", getProperty);
 
@@ -22,18 +27,23 @@ propertiesRoutes.get("/get/:id", getOneProperty);
 
 propertiesRoutes.get("/filter", filterProperties);
 
-propertiesRoutes.post("/create", upload.single("images"), createProperty);
+propertiesRoutes.post(
+  "/create",
+  isAdmin,
+  upload.single("images"),
+  createProperty
+);
 
-propertiesRoutes.post("/date/:id", createDate);
+propertiesRoutes.post("/date/:id", isLogged, createDate);
 
-propertiesRoutes.post("/date/confirm/:id", confirmDate);
+propertiesRoutes.post("/date/confirm/:id", isAdminOrAgent, confirmDate);
 
-propertiesRoutes.post("/review/:id/post", postReview);
+propertiesRoutes.post("/review/:id/post", isLogged, postReview);
 
 propertiesRoutes.get("/review/:id/get", getReviews);
 
-propertiesRoutes.put("/update/:id", updateProperty);
+propertiesRoutes.put("/update/:id", isAdmin, updateProperty);
 
-propertiesRoutes.delete("/delete/:id", deleteProperty);
+propertiesRoutes.delete("/delete/:id", isAdminOrAgent, deleteProperty);
 
 module.exports = propertiesRoutes;
